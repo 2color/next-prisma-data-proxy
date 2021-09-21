@@ -5,7 +5,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 
 .main {
@@ -26,11 +25,14 @@
   align-items: center;
 }
 
+.footer img {
+  margin-left: 0.5rem;
+}
+
 .footer a {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-grow: 1;
 }
 
 .title a {
@@ -75,11 +77,12 @@
   justify-content: center;
   flex-wrap: wrap;
   max-width: 800px;
-  margin-top: 3rem;
+  margin-top: 1rem;
 }
 
 .card {
   margin: 1rem;
+  flex-basis: 45%;
   padding: 1.5rem;
   text-align: left;
   color: inherit;
@@ -87,17 +90,9 @@
   border: 1px solid #eaeaea;
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
-  width: 45%;
 }
 
-.card:hover,
-.card:focus,
-.card:active {
-  color: #0070f3;
-  border-color: #0070f3;
-}
-
-.card h2 {
+.card h3 {
   margin: 0 0 1rem 0;
   font-size: 1.5rem;
 }
@@ -108,10 +103,99 @@
   line-height: 1.5;
 }
 
+.navigationButton {
+  color: white;
+  background-color: #2289ff;
+  cursor: pointer;
+  margin: 5px 5px 5px 0;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.navigationButton:hover,
+.navigationButton:focus,
+.navigationButton:active {
+  background-color: #0152ae;
+}
+
 .logo {
   height: 1em;
-  margin-left: 0.5rem;
 }
+
+.commentForm {
+  display: flex;
+  flex-direction: row;
+  margin: 1rem 0;
+}
+
+.commentForm input {
+  margin: 0 1rem;
+}
+
+.deleteButton {
+  color: white;
+  background: red;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.deleteButton:hover,
+.deleteButton:focus,
+.deleteButton:active {
+  background-color: rgb(167, 0, 0);
+}
+
+.buttons {
+  margin: 1rem 0 0 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.createButton svg {
+  margin-right: 5px;
+}
+
+.createButton div {
+  height: 0;
+}
+
+.createButton {
+  display: flex;
+  flex-direction: row;
+  margin: 0 1rem 0 0;
+  color: white;
+  background: #00c41d;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.createButton:disabled {
+  background: #008815;
+  cursor: default;
+}
+
+.likeButton {
+  display: flex;
+  flex-direction: row;
+  margin: 0 1rem 0 0;
+  background: rgb(246, 248, 250);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+.likeButton:hover {
+  background: rgb(234, 238, 242);
+}
+
 
 @media (max-width: 600px) {
   .grid {
