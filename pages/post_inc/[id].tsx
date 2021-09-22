@@ -2,7 +2,7 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import PostComponent from '../../components/post'
 import { useRouter } from 'next/router'
 import { Post, Comment } from '@prisma/client'
-import { deletePost, submitComment } from '../../lib/api'
+import { deletePost, incrementLikes, incrementViews, submitComment } from '../../lib/api'
 import prisma from 'lib/prisma'
 
 // This function gets called at build time
@@ -72,6 +72,8 @@ const PostPage: React.FC<PostPageProps> = (props) => {
       post={props.post}
       onDeletePost={deletePost}
       onSubmitComment={submitComment}
+      onLikePost={incrementLikes}
+      onViewPost={incrementViews}
     />
   )
 }
