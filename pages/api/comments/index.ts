@@ -8,7 +8,7 @@ export default async function handle(
   if (req.method === 'POST') {
     const body = JSON.parse(req.body)
     const comment = body.comment as string
-    const postId = body.postId as number
+    const postId = parseInt(body.postId, 10)
 
     const createdComment = await prisma.comment.create({
       data: {

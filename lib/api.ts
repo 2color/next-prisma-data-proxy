@@ -12,7 +12,7 @@ export const submitComment = async (
   postId: number,
   comment: string,
 ): Promise<Comment> => {
-  const response = await fetch(`/api/comment`, {
+  const response = await fetch(`/api/comments`, {
     method: 'POST',
     body: JSON.stringify({ postId, comment }),
   })

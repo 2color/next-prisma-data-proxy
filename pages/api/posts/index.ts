@@ -12,8 +12,7 @@ export default async function handle(
       },
     })
     res.json(posts)
-  }
-  if (req.method === 'POST') {
+  } else if (req.method === 'POST') {
     const post = await prisma.post.create({
       data: {
         title: `New Post ✍️`,
