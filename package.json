@@ -1,5 +1,5 @@
 {
-  "name": "vercel-prisma-data-proxy",
+  "name": "next-prisma-data-proxy",
   "version": "0.1.0",
   "private": true,
   "scripts": {
