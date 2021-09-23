@@ -4,8 +4,9 @@ This is an example blog app showing how to use the Prisma ORM with the Prisma Da
 
 For comparison the blog uses two rendering approaches to display blog posts:
 - **server-side rendering**
-– **static generation with incremental static re-generation** 
+- **static generation with incremental static re-generation**
 
+[Docs for the Prisma Data Proxy](https://pris.ly/d/data-proxy)
 ## Installation
 
 Clone the repo and install the dependencies:
