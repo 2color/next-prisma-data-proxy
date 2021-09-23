@@ -1,12 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import prisma from 'lib/prisma'
-import { getUniqueName } from 'lib/names'
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function handle(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
   await prisma.post.deleteMany()
   const promises = []
   for (const post of seedPosts) {
-    const name = getUniqueName()
     promises.push(
       prisma.post.create({
         data: {

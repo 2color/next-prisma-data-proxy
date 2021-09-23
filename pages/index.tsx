@@ -3,10 +3,9 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Loader from 'react-loader-spinner'
 import styles from '../styles/Main.module.css'
-import { PrismaClient, Post } from '@prisma/client'
-import Router from 'next/router'
+import { Post } from '@prisma/client'
 import { useCallback, useState } from 'react'
-import { createPost, deletePost, resetPosts } from 'lib/api'
+import { createPost, resetPosts } from 'lib/api'
 import prisma from 'lib/prisma'
 
 // This function gets called at build time
@@ -100,25 +99,16 @@ const Home: React.FC<HomeProps> = (props) => {
                 <h3>{p.title}</h3>
                 <p>{p.excerpt}</p>
                 <div className={styles.buttons}>
-                  <Link href={`/post_ssr/${p.id}`} key={`${p.id}-ssr`}>
+                  <Link passHref href={`/post_ssr/${p.id}`} key={`${p.id}-ssr`}>
                     <button className={styles.navigationButton}>
                       Open SSR
                     </button>
                   </Link>
-                  <Link href={`/post_inc/${p.id}`} key={`${p.id}-static`}>
+                  <Link passHref href={`/post_inc/${p.id}`} key={`${p.id}-static`}>
                     <button className={styles.navigationButton}>
                       Open static
                     </button>
                   </Link>
-
-                  {/* <button
-                    className={styles.deleteButton}
-                    onClick={() => {
-                      deletePost(p.id)
-                    }}
-                  >
-                    Delete Post
-                  </button> */}
                 </div>
               </a>
             )

@@ -33,7 +33,8 @@ const PostComponent: React.FC<PostProps> = ({
       setViewsCount(views)
     }
     updatePostViews()
-  }, [])
+  }, [onViewPost, post.id])
+
   const onSubmit = useCallback(
     async (e) => {
       e.preventDefault()
@@ -42,9 +43,9 @@ const PostComponent: React.FC<PostProps> = ({
       const createdComment = await onSubmitComment(post.id, comment)
       setPostingComment(false)
       setComment('')
-      setComments([...comments, createdComment])
+      setComments((comments) => [...comments, createdComment])
     },
-    [onSubmitComment, comment],
+    [onSubmitComment, comment, post.id],
   )
   const onLike = useCallback(
     async (e) => {
@@ -52,7 +53,7 @@ const PostComponent: React.FC<PostProps> = ({
       const { likes } = await onLikePost(post.id)
       setLikesCount(likes)
     },
-    [setLikesCount],
+    [setLikesCount, onLikePost, post.id],
   )
   return (
     <div className={styles.container}>
@@ -63,19 +64,20 @@ const PostComponent: React.FC<PostProps> = ({
       <h1>{post.title}</h1>
       <p>{post.excerpt}</p>
       <p>
-        <strong>Views:</strong> {viewsCount}<br />
+        <strong>Views:</strong> {viewsCount}
+        <br />
         <button onClick={onLike} className={styles.likeButton} type="button">
-        <Loader
-          visible={isPostingComment}
-          type="Oval"
-          color="white"
-          height="15"
-          width="15"
-        />{' '}
-        👍 {likesCount}
-      </button>
+          <Loader
+            visible={isPostingComment}
+            type="Oval"
+            color="white"
+            height="15"
+            width="15"
+          />{' '}
+          👍 {likesCount}
+        </button>
       </p>
-      
+
       {comments?.length ? <Comments comments={comments} /> : null}
       <form className={styles.commentForm} onSubmit={onSubmit}>
         <input
