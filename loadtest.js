@@ -1,6 +1,6 @@
 // @ts-check
 import http from 'k6/http'
-import { check, sleep, group } from 'k6'
+import { check, fail, sleep, group } from 'k6'
 import { Trend } from 'k6/metrics'
 
 let GetPostsTrend = new Trend('Get posts', true)
@@ -11,13 +11,13 @@ let ViewPostTrend = new Trend('View post', true)
 
 export let options = {
   vus: 40,
-  duration: '15s',
+  duration: '10s',
 }
 
 const SLEEP_DURATION = 0.1
 
-const baseUrl = 'http://localhost:3000/api'
-// const baseUrl = `https://${__ENV.API_URL}`
+// const baseUrl = 'http://localhost:3000/api'
+const baseUrl = `https://${__ENV.API_URL}/api`
 
 // Get posts          http localhost:3000/api/posts
 // Get post/comments  http localhost:3000/api/posts/1
@@ -30,16 +30,20 @@ export default function () {
   group('user flow', function () {
     // Get posts
     let getPostsRes = http.get(`${baseUrl}/posts`)
-    check(getPostsRes, { 'status 200 (get feed)': (r) => r.status == 200 })
+    check(getPostsRes, { 'status 200 (get posts)': (r) => r.status == 200 })
     GetPostsTrend.add(getPostsRes.timings.duration)
 
     sleep(SLEEP_DURATION)
 
     // Create Post
     let createPostRes = http.post(`${baseUrl}/posts`)
-    check(createPostRes, {
-      'status 200 (create post)': (r) => r.status == 200,
-    })
+    if (
+      !check(createPostRes, {
+        'status 200 (create post)': (r) => r.status == 200,
+      })
+    ) {
+      fail('Create post failed!')
+    }
     CreatePostTrend.add(createPostRes.timings.duration)
     const createdPostId = JSON.parse(String(createPostRes.body)).id
 
@@ -72,7 +76,7 @@ export default function () {
     // Add view to post
     let createLikeRes = http.put(`${baseUrl}/posts/${createdPostId}/likes`)
     check(createLikeRes, {
-      'status 200 (view post)': (r) => r.status == 200,
+      'status 200 (like post)': (r) => r.status == 200,
     })
     LikePostTrend.add(createLikeRes.timings.duration)
   })
