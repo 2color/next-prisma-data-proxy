@@ -10,6 +10,7 @@ export default async function handle(
       orderBy: {
         id: 'desc',
       },
+      take: 10,
     })
     res.json(posts)
   } else if (req.method === 'POST') {
