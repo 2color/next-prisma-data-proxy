@@ -7,6 +7,11 @@ For comparison the blog uses two rendering approaches to display blog posts:
 - **static generation with incremental static re-generation**
 
 [Docs for the Prisma Data Proxy](https://pris.ly/d/data-proxy)
+
+[![](https://user-images.githubusercontent.com/1992255/135487729-6dbc8da4-deff-47e2-9c28-a875f995eea1.jpg)](https://youtu.be/iyGZ8JFPgoY)
+
+
+
 ## Installation
 
 Clone the repo and install the dependencies:
