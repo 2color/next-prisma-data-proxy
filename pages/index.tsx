@@ -8,7 +8,7 @@ import { useCallback, useState } from 'react'
 import { createPost, resetPosts } from 'lib/api'
 import prisma from 'lib/prisma'
 
-// This function gets called at build time
+// 👇 called at build time
 export const getStaticProps: GetStaticProps = async () => {
   const posts = await prisma.post.findMany({
     orderBy: {
@@ -19,10 +19,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       posts,
     },
-    // Next.js will attempt to re-generate the page:
-    // - When a request comes in
-    // - At most once every second
-    revalidate: 1,
   }
 }
 
@@ -57,7 +53,7 @@ const Home: React.FC<HomeProps> = (props) => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Prisma & Next.js</h1>
+        <h1 className={styles.title}>Next.js & Prisma</h1>
         <h2 className={styles.subtitle}>Databases in Serverless Made Easy</h2>
         <div className={styles.buttons}>
           <button className={styles.createButton} onClick={onCreatePost}>
@@ -88,8 +84,8 @@ const Home: React.FC<HomeProps> = (props) => {
         <div className={styles.grid}>
           {posts.map((p: Post) => {
             return (
-              <div className={styles.card}>
-                <a key={`${p.id}`}>
+              <div key={`${p.id}`} className={styles.card}>
+                <a>
                   <h3>{p.title}</h3>
                   <p>{p.excerpt}</p>
                   <div className={styles.buttons}>

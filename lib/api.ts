@@ -29,7 +29,7 @@ export const createPost = async (): Promise<Post> => {
 }
 
 export const resetPosts = async (): Promise<Post[]> => {
-  const response = await fetch(`/api/seed`, {
+  const response = await fetch(`/api/reset`, {
     method: 'POST',
   })
   const posts = await response.json()

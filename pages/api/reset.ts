@@ -7,10 +7,10 @@ export default async function handle(
   res: NextApiResponse,
 ) {
   await prisma.post.deleteMany()
-  const promises = []
+  const txs = []
 
   for (const post of seedPosts) {
-    promises.push(
+    txs.push(
       prisma.post.create({
         data: {
           title: post.title,
@@ -22,7 +22,7 @@ export default async function handle(
       }),
     )
   }
-  const createdPosts = await Promise.all(promises)
+  const createdPosts = await prisma.$transaction(txs)
 
   res.statusCode = 200
   res.json(createdPosts)
