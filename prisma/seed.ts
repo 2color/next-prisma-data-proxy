@@ -1,14 +1,10 @@
-import { NextApiRequest, NextApiResponse } from 'next'
-import prisma from 'lib/prisma'
-import { seedPosts } from 'lib/posts'
+import { PrismaClient } from '@prisma/client'
+import { seedPosts } from '../lib/posts'
 
-export default async function handle(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
-  await prisma.post.deleteMany()
+const prisma = new PrismaClient()
+
+async function main() {
   const promises = []
-
   for (const post of seedPosts) {
     promises.push(
       prisma.post.create({
@@ -24,6 +20,7 @@ export default async function handle(
   }
   const createdPosts = await Promise.all(promises)
 
-  res.statusCode = 200
-  res.json(createdPosts)
+  console.log(`Created ${createdPosts.length} posts`)
 }
+
+main().finally(async () => await prisma.$disconnect)

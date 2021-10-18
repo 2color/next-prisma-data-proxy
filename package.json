@@ -10,6 +10,9 @@
     "vercel-build": "prisma generate && npm run migrate:deploy && next build",
     "migrate:deploy": "DATABASE_URL=\"$MIGRATE_DATABASE_URL\" prisma migrate deploy"
   },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "dependencies": {
     "@prisma/client": "3.1.0-integration-data-proxy-engine.1",
     "next": "11.1.2",

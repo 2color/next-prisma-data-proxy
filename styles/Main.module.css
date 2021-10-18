@@ -52,6 +52,13 @@
   font-size: 4rem;
 }
 
+.subtitle {
+  color: #f92672ff;
+  margin: 0;
+  line-height: 1.15;
+  font-size: 2rem;
+}
+
 .title,
 .description {
   text-align: center;
@@ -76,11 +83,12 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  max-width: 800px;
+  max-width: 900px;
   margin-top: 1rem;
 }
 
 .card {
+  min-height: 270px;
   margin: 1rem;
   flex-basis: 45%;
   padding: 1.5rem;

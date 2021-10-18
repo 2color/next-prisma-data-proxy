@@ -14,14 +14,6 @@ export const getStaticProps: GetStaticProps = async () => {
     orderBy: {
       id: 'desc',
     },
-    select: {
-      id: true,
-      title: true,
-      excerpt: true,
-      content: true,
-      likes: true,
-      views: true,
-    },
   })
   return {
     props: {
@@ -65,7 +57,8 @@ const Home: React.FC<HomeProps> = (props) => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Welcome to the Blog!</h1>
+        <h1 className={styles.title}>Prisma & Next.js</h1>
+        <h2 className={styles.subtitle}>Databases in Serverless Made Easy</h2>
         <div className={styles.buttons}>
           <button className={styles.createButton} onClick={onCreatePost}>
             {
@@ -95,22 +88,30 @@ const Home: React.FC<HomeProps> = (props) => {
         <div className={styles.grid}>
           {posts.map((p: Post) => {
             return (
-              <a key={`${p.id}`} className={styles.card}>
-                <h3>{p.title}</h3>
-                <p>{p.excerpt}</p>
-                <div className={styles.buttons}>
-                  <Link passHref href={`/post_ssr/${p.id}`} key={`${p.id}-ssr`}>
-                    <button className={styles.navigationButton}>
-                      Open SSR
-                    </button>
-                  </Link>
-                  <Link passHref href={`/post_inc/${p.id}`} key={`${p.id}-static`}>
-                    <button className={styles.navigationButton}>
-                      Open static
-                    </button>
-                  </Link>
-                </div>
-              </a>
+              <div className={styles.card}>
+                <a key={`${p.id}`}>
+                  <h3>{p.title}</h3>
+                  <p>{p.excerpt}</p>
+                  <div className={styles.buttons}>
+                    <Link
+                      passHref
+                      href={`/post_ssr/${p.id}`}
+                      key={`${p.id}-ssr`}
+                    >
+                      <button className={styles.navigationButton}>SSR</button>
+                    </Link>
+                    <Link
+                      passHref
+                      href={`/post_inc/${p.id}`}
+                      key={`${p.id}-static`}
+                    >
+                      <button className={styles.navigationButton}>
+                        Static
+                      </button>
+                    </Link>
+                  </div>
+                </a>
+              </div>
             )
           })}
         </div>
